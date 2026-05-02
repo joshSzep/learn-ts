@@ -1,8 +1,16 @@
+type GreetingConfig = {
+    recipient: string;
+    excited?: boolean;
+};
 
-function greet(name: string): string {
-    return `Hello, ${name}!`;
+function createGreeting(config: GreetingConfig): string {
+    const punctuation = config.excited ? "!" : ".";
+    return `Hello, ${config.recipient}${punctuation}`;
 }
 
-const message = greet("World");
+const message = createGreeting({
+    recipient: "World",
+    excited: true,
+});
 
 console.log(message);
