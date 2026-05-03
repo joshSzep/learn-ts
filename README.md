@@ -1,6 +1,9 @@
 # Learn TypeScript
 
-This repository is a small TypeScript learning space. Right now it contains one project: `hello_world`, a tiny Node CLI that demonstrates typed objects, optional properties, argument parsing, ESM imports, and tests.
+This repository is a small TypeScript learning space. Right now it contains two tiny Node CLI projects:
+
+- `hello_world`, a minimal TypeScript CLI that demonstrates typed objects, optional properties, hand-written argument parsing, ESM imports, and tests.
+- `hello_world_modern`, the same idea using a more modern CLI stack: Commander for parsing, tsx for development, tsdown for clean builds, and Vitest for tests.
 
 ## Project
 
@@ -8,16 +11,27 @@ This repository is a small TypeScript learning space. Right now it contains one 
 hello_world/
   src/
     greeting.ts       # Pure TypeScript functions
-    greeting.test.ts  # Vitest examples
     index.ts          # CLI entrypoint
+  tests/
+    greeting.test.ts  # Vitest examples
   tsconfig.json       # Type checking settings
   tsconfig.build.json # Production build settings
+  vitest.config.ts    # Test runner settings
+
+hello_world_modern/
+  src/
+    greeting.ts       # Pure TypeScript functions plus Commander parsing
+    index.ts          # CLI entrypoint
+  tests/
+    greeting.test.ts  # Vitest examples
+  tsdown.config.ts    # Clean production build settings
+  tsconfig.json       # Type checking settings
   vitest.config.ts    # Test runner settings
 ```
 
 ## Try It
 
-From `hello_world`:
+From either `hello_world` or `hello_world_modern`:
 
 ```bash
 npm run dev
@@ -40,6 +54,7 @@ npm run start -- Josh --excited
 - `excited?: boolean` means the property can be omitted.
 - `parseGreetingArgs` accepts `readonly string[]`, so it promises not to mutate the CLI arguments.
 - Tests make the old argument parsing mistake visible: `in` checks array indexes, while `includes` checks values.
+- `hello_world_modern` uses `tsdown` with `clean: true`, so stale files do not hang around in `dist/` after builds.
 
 ## Practice Ideas
 
