@@ -1,21 +1,23 @@
 {
   "name": "hello_world",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A tiny TypeScript CLI for learning strict types, modules, and tests.",
+  "main": "dist/index.js",
   "scripts": {
     "dev": "tsx src/index.ts",
+    "test": "vitest run",
     "typecheck": "tsc --noEmit",
-    "build": "tsc",
+    "build": "tsc -p tsconfig.build.json",
     "start": "node dist/index.js"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "type": "commonjs",
+  "license": "MIT",
+  "type": "module",
   "devDependencies": {
     "@types/node": "^25.6.0",
     "tsx": "^4.21.0",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.5"
   }
 }

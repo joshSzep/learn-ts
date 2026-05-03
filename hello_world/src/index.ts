@@ -1,24 +1,12 @@
-type GreetingConfig = {
-    recipient: string;
-    excited?: boolean;
-};
+import { fileURLToPath } from "node:url";
 
-function createGreeting(config: GreetingConfig): string {
-    const punctuation = config.excited ? "!" : ".";
-    return `Hello, ${config.recipient}${punctuation}`;
+import { createGreeting, parseGreetingArgs } from "./greeting.js";
+
+const isCliEntrypoint = process.argv[1] === fileURLToPath(import.meta.url);
+
+if (isCliEntrypoint) {
+    const config = parseGreetingArgs(process.argv.slice(2));
+    const message = createGreeting(config);
+
+    console.log(message);
 }
-
-const args = process.argv.slice(2);
-const positionalArgs = args.filter((arg) => !arg.startsWith("--"));
-const flags = args.filter((arg) => !(arg in positionalArgs))
-console.log(args)
-
-const recipient = positionalArgs[0] ?? "World";
-const excited = flags.includes("--excited");
-
-const message = createGreeting({
-    recipient,
-    excited,
-});
-
-console.log(message);
