@@ -8,9 +8,17 @@ function createGreeting(config: GreetingConfig): string {
     return `Hello, ${config.recipient}${punctuation}`;
 }
 
+const args = process.argv.slice(2);
+const positionalArgs = args.filter((arg) => !arg.startsWith("--"));
+const flags = args.filter((arg) => !(arg in positionalArgs))
+console.log(args)
+
+const recipient = positionalArgs[0] ?? "World";
+const excited = flags.includes("--excited");
+
 const message = createGreeting({
-    recipient: "World",
-    excited: true,
+    recipient,
+    excited,
 });
 
 console.log(message);
